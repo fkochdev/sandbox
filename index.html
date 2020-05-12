@@ -135,7 +135,7 @@
 						attribute='position'
 						dur="1000"
 						begin="moveToStart"
-						to="2.81 0 1.00"></a-animation>
+						to="0 0 0"></a-animation>
 					<a-camera id="camera" wasd-controls="enabled:false;" camera="active: true" fov="70" mouse-cursor look-controls="false" pik-look-controls="reverseMouseDrag: true; yaw:50; pitch:-10;" near="0.1">
 						<a-animation 
 							attribute='pik-look-controls.yaw'
@@ -186,17 +186,17 @@
 					dracoDecoderPath: src/js/loaders/;
 					"
 					gltf-material-changer
-					scale="0.0015 0.0015 0.0015"
+					scale="0.001 0.001 0.001"
 					gltf-material-upres="basePath: src/assets/materials/; mobile:false"
 				></a-entity>
-				<!--a-entity class='appliances-model'
+				<a-entity class='appliances-model'
 					gltf-model-draco="
-					src:src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Back_up.gltf;
+					src:src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/occhio/test.gltf;
 					dracoDecoderPath: src/js/loaders/;
 					"
-					scale="0.001 0.001 0.001"
+					scale="0.1 0.1 0.1"
 				></a-entity>
-				<a-entity class='animated-model raycaster #5' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Top_Right.gltf" gltf-material-changer
+				<!--a-entity class='animated-model raycaster #5' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Top_Right.gltf" gltf-material-changer
 				gltf-material-upres="basePath: src/assets/materials/; mobile:false" scale="0.001 0.001 0.001">
 					<a-animation attribute="position"
 						begin="open"

@@ -1,0 +1,130 @@
+{
+	"asset": {
+		"version": "2.0",
+		"generator": "babylon.js glTF exporter for 3ds max 2018 v1.1.0",
+		"copyright": "2017 (c) BabylonJS"
+	},
+	"scene": 0,
+	"scenes": [{
+		"nodes": [0, 1]
+	}],
+	"nodes": [{
+		"mesh": 0,
+		"translation": [0.0, 0.0, 0.0],
+		"rotation": [0.0, 0.0, 0.0, 1.0],
+		"scale": [1.17415, 1.17415, 1.17415],
+		"name": "Pyramid001"
+	}, {
+		"mesh": 1,
+		"translation": [0.0472112149, 0.0, -0.077603],
+		"rotation": [0.0, 0.0, 0.0, 1.0],
+		"scale": [1.0, 1.0, 1.0],
+		"name": "Circle001"
+	}],
+	"meshes": [{
+		"primitives": [{
+			"attributes": {
+				"POSITION": 1,
+				"NORMAL": 2,
+				"TEXCOORD_0": 3
+			},
+			"indices": 0,
+			"mode": 4,
+			"material": 0
+		}],
+		"name": "Pyramid001"
+	}, {
+		"primitives": [{
+			"attributes": {
+				"POSITION": 5,
+				"NORMAL": 6
+			},
+			"indices": 4,
+			"mode": 4,
+			"material": 0
+		}],
+		"name": "Circle001"
+	}],
+	"accessors": [{
+		"bufferView": 0,
+		"componentType": 5123,
+		"count": 360,
+		"type": "SCALAR",
+		"name": "accessorIndices"
+	}, {
+		"bufferView": 1,
+		"componentType": 5126,
+		"count": 360,
+		"max": [3.22219849, 11.1595678, 0.6363729],
+		"min": [-3.22219849, -0.00524291443, -0.6381442],
+		"type": "VEC3",
+		"name": "accessorPositions"
+	}, {
+		"bufferView": 1,
+		"byteOffset": 4320,
+		"componentType": 5126,
+		"count": 360,
+		"type": "VEC3",
+		"name": "accessorNormals"
+	}, {
+		"bufferView": 2,
+		"componentType": 5126,
+		"count": 360,
+		"type": "VEC2",
+		"name": "accessorUVs"
+	}, {
+		"bufferView": 0,
+		"byteOffset": 720,
+		"componentType": 5123,
+		"count": 864,
+		"type": "SCALAR",
+		"name": "accessorIndices"
+	}, {
+		"bufferView": 1,
+		"byteOffset": 8640,
+		"componentType": 5126,
+		"count": 864,
+		"max": [5.92048454, 0.09000015, 5.92048454],
+		"min": [-5.92048454, -0.09000015, -5.92048454],
+		"type": "VEC3",
+		"name": "accessorPositions"
+	}, {
+		"bufferView": 1,
+		"byteOffset": 19008,
+		"componentType": 5126,
+		"count": 864,
+		"type": "VEC3",
+		"name": "accessorNormals"
+	}],
+	"bufferViews": [{
+		"buffer": 0,
+		"byteLength": 2448,
+		"name": "bufferViewScalar"
+	}, {
+		"buffer": 0,
+		"byteOffset": 2448,
+		"byteLength": 29376,
+		"byteStride": 12,
+		"name": "bufferViewFloatVec3"
+	}, {
+		"buffer": 0,
+		"byteOffset": 31824,
+		"byteLength": 2880,
+		"byteStride": 8,
+		"name": "bufferViewFloatVec2"
+	}],
+	"buffers": [{
+		"uri": "pointer.bin",
+		"byteLength": 34704
+	}],
+	"materials": [{
+		"pbrMetallicRoughness": {
+			"baseColorFactor": [0.0174952224, 1.0, 0.0932365656, 1.0],
+			"metallicFactor": 0.0,
+			"roughnessFactor": 0.0
+		},
+		"emissiveFactor": [0.8046875, 0.73046875, 0.41796875],
+		"alphaMode": "OPAQUE",
+		"name": "Pointer"
+	}]
+}

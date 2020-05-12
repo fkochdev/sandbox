@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Showroom_Preview</title>
+		<link rel="stylesheet" type="text/css" href="dist/css/styles.css">
+		<link href="src/assets/images/favicon.png" rel="shortcut icon">
+		<script src="dist/js/app.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	<body style="overflow:hidden;">
+		<div class="canvas-container">
+			<a-scene outline main class="main-scene" antialias="true" embedded light="defaultLightsEnabled: false" renderer="gammaOutput:true;">
+				<a-assets>
+					<img id="loading-img" crossorigin="anonymous" src="src/assets/images/loading.jpg"></img>
+					<script id="hotspot" type="text/html">
+						<a-entity class="hotspot raycaster no-teleport" scale="2 2 2" material="shader:flat; opacity:0.25; side:back; color:white;" geometry="primitive: sphere; radius:0.06;">
+							<a-entity material="shader:flat; opacity:0.5; color:black; side:back;" geometry="primitive: sphere; radius:0.05;"></a-entity>
+							<a-entity material="shader:flat; color:white;" geometry="primitive: sphere; radius:0.03;"></a-entity>
+						</a-entity>
+					</script>
+					<script id="colour" type="text/html">
+						<a-animation attribute="position"
+							begin="hide"
+							dur="500"
+							fill="forwards"
+							to="0 0 0"></a-animation>
+						<a-animation attribute="position"
+							begin="show"
+							dur="500"
+							fill="forwards"
+							to="${show}"></a-animation>
+						<a-animation attribute="scale"
+							begin="enter"
+							dur="100"
+							fill="forwards"
+							to="1.2 1.2 1.2"></a-animation>
+						<a-animation attribute="scale"
+							begin="exit"
+							dur="100"
+							fill="forwards"
+							to="1 1 1"></a-animation>
+						<a-ring material="color:black;depthTest=false;" radius-inner="0.08" radius-outer="0.085" class='paint-ring' position='0 0 -0.1'>
+							<a-animation attribute="material.color"
+								begin="select"
+								dur="100"
+								fill="forwards"
+								from="back"
+								to="white"></a-animation>
+							<a-animation attribute="material.color"
+								begin="unselect"
+								dur="100"
+								fill="forwards"
+								from="white"
+								to="black"></a-animation>
+						</a-ring>
+						<a-circle material="${material}" radius="0.08" class='vrbtn paint raycaster no-teleport' position='0 0 -0.1'></a-circle>
+					</script>
+					<script id="imagebtn" type="text/html">
+						<a-animation attribute="position"
+							begin="corner"
+							dur="200"
+							fill="forwards"
+							to="0.35 0.3 0"></a-animation>
+						<a-animation attribute="position"
+							begin="return"
+							dur="200"
+							fill="forwards"
+							to="0 0 0"></a-animation>
+						<a-animation attribute="scale"
+							begin="shrink"
+							dur="200"
+							fill="forwards"
+							to="0 0 0"></a-animation>
+						<a-animation attribute="scale"
+							begin="expand"
+							dur="200"
+							fill="forwards"
+							to="1 1 1"></a-animation>
+						<a-animation attribute="scale"
+							begin="enter"
+							dur="100"
+							fill="forwards"
+							to="1.2 1.2 1.2"></a-animation>
+						<a-animation attribute="scale"
+							begin="exit"
+							dur="100"
+							fill="forwards"
+							to="1 1 1"></a-animation>
+						<a-animation attribute="rotation"
+							begin="show"
+							dur="500"
+							fill="forwards"
+							to="1 1 1"></a-animation>
+						<a-animation attribute="scale"
+							begin="hide"
+							dur="500"
+							fill="forwards"
+							to="0 0 0"></a-animation>
+						<a-image class="main vrbtn raycaster no-teleport" height="0.2" width="0.2" src=${src}></a-image>
+						<a-ring material="color: #cebb6b;depthTest:${depthtest};" radius-inner="0.11" radius-outer="0.12" class='paint-ring' position='0 0 0'>
+							<a-animation attribute="material.color"
+								begin="select"
+								dur="100"
+								fill="forwards"
+								from="#cebb6b"
+								to="black"></a-animation>
+							<a-animation attribute="material.color"
+								begin="unselect"
+								dur="100"
+								fill="forwards"
+								from="black"
+								to="#cebb6b"></a-animation>
+						</a-ring>
+					</script>
+					<script id="label" type="text/html">
+						<a-entity info-bubble="borderColor:white;height:0.1;width:0.5;" scale="0 0 0">
+							<a-animation attribute="scale"
+								begin="show"
+								dur="200"
+								fill="forwards"
+								to="1 1 1"></a-animation>
+							<a-animation attribute="scale"
+								begin="hide"
+								dur="200"
+								fill="forwards"
+								to="0 0 0"></a-animation>
+							<a-text align="center" color="black" width="0.6" line-height="55" wrap-count="22" position="0 0.17 0.01" value=${value}></a-text>
+						</a-entity>
+						</a-text>
+					</script>
+				</a-assets>
+				<a-entity light="type: ambient; intensity:1; color: #FFF"></a-entity>
+				<a-entity id="cameraRig" class="camera-parent teleport-object" position="2.81 0 1.00">
+					<a-animation class="animateToStart"
+						attribute='position'
+						dur="1000"
+						begin="moveToStart"
+						to="2.81 0 1.00"></a-animation>
+					<a-camera id="camera" wasd-controls="enabled:false;" camera="active: true" fov="70" mouse-cursor look-controls="false" pik-look-controls="reverseMouseDrag: true; yaw:50; pitch:-10;" near="0.1">
+						<a-animation 
+							attribute='pik-look-controls.yaw'
+							dur="1000"
+							begin="yawToStart"
+							to="50"></a-animation>
+						<a-animation 
+							attribute='pik-look-controls.pitch'
+							dur="1000"
+							begin="pitchToStart"
+							to="-10"></a-animation>
+					</a-camera>
+					<a-entity
+						id="left-hand"
+						vive-controls="hand: left"
+						laser-controls="hand:left;"
+						teleport-controls="
+							cameraRig: #cameraRig;
+							teleportOrigin: #camera;
+							collisionEntities: .floorRight;
+							cursorHidden:true;
+						"
+						oculus-go-controls
+						daydream-controls
+						hand-controls="left"
+						raycaster="objects: .raycaster, .animated-model; recursive: true; near: 0.1; far:10;">
+					</a-entity>
+					<a-entity
+						id="right-hand"
+						laser-controls="hand:right;"
+						vive-controls="hand: right"
+						teleport-controls="
+							cameraRig: #cameraRig;
+							teleportOrigin: #camera;
+							collisionEntities: .floorRight;
+							cursorHidden:true;
+						"
+						oculus-go-controls
+						daydream-controls
+						hand-controls="right"
+						raycaster="objects: .raycaster, .animated-model; recursive: true; near: 0.1; far:10;">
+					</a-entity>
+				</a-entity>
+				<a-entity id="orbit-target" position="0 0 0"></a-entity>
+				<a-entity class='scene-model'
+					gltf-model-draco="
+					src:src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/SCENE.gltf;
+					dracoDecoderPath: src/js/loaders/;
+					"
+					gltf-material-changer
+					scale="0.001 0.001 0.001"
+					gltf-material-upres="basePath: src/assets/materials/; mobile:false"
+				></a-entity>
+				<!--a-entity class='appliances-model'
+					gltf-model-draco="
+					src:src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Back_up.gltf;
+					dracoDecoderPath: src/js/loaders/;
+					"
+					scale="0.001 0.001 0.001"
+				></a-entity>
+				<a-entity class='animated-model raycaster #5' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Top_Right.gltf" gltf-material-changer
+				gltf-material-upres="basePath: src/assets/materials/; mobile:false" scale="0.001 0.001 0.001">
+					<a-animation attribute="position"
+						begin="open"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0.3"></a-animation>
+					<a-animation attribute="position"
+						begin="demo"
+						direction="alternate"
+						dur="250"
+						fill="forwards"
+						to="0 0 0.03"
+						easing="ease-in-out"
+						repeat="1"></a-animation>
+					<a-animation attribute="position"
+						begin="close"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0"></a-animation>
+				</a-entity>
+				<a-entity class='animated-model raycaster no-teleport' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Middle_Right.gltf" gltf-material-changer scale="0.001 0.001 0.001" gltf-material-upres="basePath: src/assets/materials/; mobile:false">
+					<a-animation attribute="position"
+						begin="open"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0.3"></a-animation>
+					<a-animation attribute="position"
+						begin="demo"
+						direction="alternate"
+						dur="250"
+						fill="forwards"
+						to="0 0 0.03"
+						easing="ease-in-out"
+						repeat="1"></a-animation>
+					<a-animation attribute="position"
+						begin="close"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0"></a-animation>
+				</a-entity>
+				<a-entity class='animated-model raycaster no-teleport' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Bottom_Right.gltf" gltf-material-changer scale="0.001 0.001 0.001" gltf-material-upres="basePath: src/assets/materials/; mobile:false">
+					<a-animation attribute="position"
+						begin="open"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0.3"></a-animation>
+					<a-animation attribute="position"
+						begin="demo"
+						direction="alternate"
+						dur="250"
+						fill="forwards"
+						to="0 0 0.03"
+						easing="ease-in-out"
+						repeat="1"></a-animation>
+					<a-animation attribute="position"
+						begin="close"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0"></a-animation>
+				</a-entity>
+				<a-entity class='animated-model raycaster no-teleport' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Top_Left.gltf" gltf-material-changer scale="0.001 0.001 0.001" gltf-material-upres="basePath: src/assets/materials/; mobile:false">
+					<a-animation attribute="position"
+						begin="open"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0.3"></a-animation>
+					<a-animation attribute="position"
+						begin="demo"
+						direction="alternate"
+						dur="250"
+						fill="forwards"
+						to="0 0 0.03"
+						easing="ease-in-out"
+						repeat="1"></a-animation>
+					<a-animation attribute="position"
+						begin="close"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0"></a-animation>
+				</a-entity>
+				<a-entity class='animated-model raycaster no-teleport' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Middle_Left.gltf" gltf-material-changer scale="0.001 0.001 0.001" gltf-material-upres="basePath: src/assets/materials/; mobile:false">
+					<a-animation attribute="position"
+						begin="open"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0.3"></a-animation>
+					<a-animation attribute="position"
+						begin="demo"
+						direction="alternate"
+						dur="250"
+						fill="forwards"
+						to="0 0 0.03"
+						easing="ease-in-out"
+						repeat="1"></a-animation>
+					<a-animation attribute="position"
+						begin="close"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0"></a-animation>
+				</a-entity>
+				<a-entity class='animated-model raycaster no-teleport' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Bottom_Left.gltf" gltf-material-changer scale="0.001 0.001 0.001" gltf-material-upres="basePath: src/assets/materials/; mobile:false">
+					<a-animation attribute="position"
+						begin="open"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0.3"></a-animation>
+					<a-animation attribute="position"
+						begin="demo"
+						direction="alternate"
+						dur="250"
+						fill="forwards"
+						to="0 0 0.03"
+						easing="ease-in-out"
+						repeat="1"></a-animation>
+					<a-animation attribute="position"
+						begin="close"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0"></a-animation>
+				</a-entity>
+				<a-entity class='animated-model raycaster no-teleport' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Cupboard_Door.gltf" gltf-material-changer gltf-material-changer-2="debug:true" scale="0.001 0.001 0.001"
+					position="0.59 0.494 -0.104" gltf-material-upres="basePath: src/assets/materials/; mobile:false">
+					<a-animation attribute="rotation"
+						begin="open"
+						dur="1000"
+						fill="forwards"
+						to="0 90 0"></a-animation>
+					<a-animation attribute="rotation"
+						begin="demo"
+						direction="alternate"
+						dur="250"
+						fill="forwards"
+						to="0 10 0"
+						easing="ease-in-out"
+						repeat="1"></a-animation>
+					<a-animation attribute="rotation"
+						begin="close"
+						dur="1000"
+						fill="forwards"
+						to="0 0 0"></a-animation>
+				</a-entity-->
+
+			    <a-entity class="floorRight" position="0.304 0 -1.809" geometry="primitive: box;width:1.84;depth:0.93;height:0.1" rotation="" scale="" visible="false"></a-entity>
+			    <a-entity class="floorRight" position="0.3 0 0.478" geometry="primitive: box; width:1.84;depth:0.93;height:0.1" rotation="" scale="" visible="false"></a-entity>
+				<a-entity class="floorRight" position="0.304 0 3.020" geometry="width:1.85;depth:1.41;height:0.1" rotation="" scale="" visible="false"></a-entity>
+				<a-entity class="floorRight" position="0.244 0 5.410" geometry="width:4.19;depth:0.71;height:0.1" rotation="" scale="" visible="false"></a-entity>
+				<a-entity class="floorRight" position="-2.216 0 3.391" geometry="width:0.64;depth:3.76;height:0.1" mrotation="" scale="" visible="false"></a-entity>
+				<a-entity class="floorRight" position="2.122 0 1.465" geometry="width:1.83;depth:7.47;height:0.1" rotation="" scale="" visible="false"></a-entity>
+				<a-entity class="floorRight" position="-1.267 0 1.5" geometry="width:1.3;depth:7.55;height:0.1" rotation="" scale="" visible="false"></a-entity>
+
+				<a-box class="hitbox raycaster material-changer no-teleport" opacity="0" color="#000000" depth='0.95' width='1.82' height='1.26' rotation="-90 0 0" position='0.27 0.43 1.59'></a-box>
+				<a-box class="hitbox raycaster material-changer no-teleport" opacity="0" color="#000000" depth="0.900" width='0.070' height='1.370' rotation="-90 0 0" position='1.140 0.466 -0.721'></a-box>
+				<a-box class="hitbox raycaster material-changer no-teleport" opacity="0" color="#000000" depth="0.900" width='0.070' height='1.370' rotation="-90 0 0" position='-0.557 0.466 -0.721'></a-box>
+				<a-box class="hitbox raycaster material-changer no-teleport" opacity="0" color="#000000" depth="0.900" width='1.680' height='0.100' rotation="-90 0 0" position='0.314 0.466 -1.253'></a-box>
+				<a-box class="hitbox raycaster material-changer no-teleport" opacity="0" color="#000000" depth="0.040" width='1.770' height='1.220' rotation="-90 0 0" position='0.314 0.894 -0.707'></a-box>
+				<a-box class="hitbox raycaster no-teleport" opacity="0" color="#000000" width='2.13' height='1.18' rotation="-90 0 0" position='0.326 0.433 4.39'></a-box>
+				<a-box class="hitbox raycaster no-teleport" opacity="0" color="#000000" width='1.1' height='4.5' rotation="-90 0 0" position='-2.31 0.43 -0.68'></a-box>
+				<a-box class="hitbox raycaster no-teleport" opacity="0" color="#000000" width='0.85' height='0.81' rotation="-90 0 0" position='2.74 0.43 5.55'></a-box>
+				<a-box class="hitbox raycaster no-teleport" opacity="0" color="#000000" width='0.85' height='0.81' rotation="-90 0 0" position='-2.2 0.43 5.55'></a-box>
+				<a-box class="hitbox raycaster no-teleport" opacity="0" color="#000000" width='1.17' height='2.22' rotation="-90 0 0" position='0.36 0.43 4.41'></a-box>
+				<a-box class="hitbox raycaster no-teleport" opacity="0" color="#000000" width='1.74' height='1.35' depth='0.04' rotation="-90 0 0" position='0.295 0.061 -0.673'></a-box>
+				<a-entity class="cursor" cursor="near: 0.1; far: 1; rayOrigin: mouse;" raycaster="objects: .raycaster, .animated-model; recursive: true; near: 0.1; far:10;" position='0 0 -0.1'>
+				</a-entity>
+				<a-box id="floor-plane" class="teleport-target raycaster" opacity="0" color="#000000" width='5.5' height='8' rotation="-90 0 0" position='0.27 -0.46 1.72'></a-box>
+				</a-entity>
+				<a-entity id="hotspot-container">
+					<a-entity class="hotspot no-teleport" position="-2.02 1.03 -1.00" look-at="[camera]">
+						<a-entity template="src: #label" data-value="'Hotspot'"></a-entity>
+						<a-entity class="button overlapper" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/arrow.png" data-target='sink'></a-entity>
+					</a-entity>
+					<a-entity class="hotspot no-teleport" position="-2.28 2.725 1.0" look-at="[camera]">
+						<a-entity template="src: #label" data-value="'Hotspot'"></a-entity>
+						<a-entity class="button overlapper" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/arrow.png" data-target='cornice'></a-entity>
+					</a-entity>
+					<a-entity class="hotspot no-teleport" position="1.78 2.121 -2.634" look-at="[camera]">
+						<a-entity template="src: #label" data-value="'Hotspot'"></a-entity>
+						<a-entity class="button overlapper" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/arrow.png" data-target='unit-door'></a-entity>
+					</a-entity>
+					<a-entity class="hotspot no-teleport" position="0.361 1.041 4.384" look-at="[camera]">
+						<a-entity template="src: #label" data-value="'Hotspot'"></a-entity>
+						<a-entity class="button overlapper" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/arrow.png" data-target='table'></a-entity>
+					</a-entity>
+					<a-entity class="hotspot no-teleport" position="0.288 1.04 -2.574" look-at="[camera]">
+						<a-entity template="src: #label" data-value="'Hotspot'"></a-entity>
+						<a-entity class="button overlapper" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/arrow.png" data-target='cooker'></a-entity>
+					</a-entity>
+					<a-entity class="hotspot no-teleport" position="0.563 1.294 2.267" look-at="[camera]">
+						<a-entity template="src: #label" data-value="'Hotspot'"></a-entity>
+						<a-entity class="button overlapper" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/arrow.png" data-target='stool'></a-entity>
+					</a-entity>
+					<a-entity class="hotspot no-teleport" position="0.048 1.364 -0.979" look-at="[camera]">
+						<a-entity template="src: #label" data-value="'Hotspot'"></a-entity>
+						<a-entity class="button overlapper" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/arrow.png" data-target='tap'></a-entity>
+					</a-entity>
+				</a-entity>
+				<a-entity class="open-anim-help no-teleport" template="src: #imagebtn" data-depthtest="true" position="0.3 0.5 0.1" data-src="src/assets/images/click.png" look-at="[camera]" visible="false">
+				</a-entity>
+				<a-entity position="0.327 1.210 -0.440" class="paint-menu overlapper no-teleport" look-at="[camera]" visible="false">
+					<a-animation attribute="scale"
+						begin="shrink"
+						dur="200"
+						fill="forwards"
+						to="0 0 0"></a-animation>
+					<a-animation attribute="scale"
+						begin="expand"
+						dur="200"
+						fill="forwards"
+						to="1 1 1"></a-animation>
+					<a-entity class="open-paint no-teleport" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/paint.png"></a-entity>
+					<a-entity template="src: #colour" data-show="0.08892 0.247 0" data-material="color: #46583e" class="opt1 no-teleport"></a-entity>
+					<a-entity template="src: #colour" data-show="0.234 0.10985 0" data-material="color: #314554" class="opt2 no-teleport"></a-entity>
+					<a-entity template="src: #colour" data-show="0.247 -0.08892 0" data-material="color: #876726" class="opt3 no-teleport"></a-entity>
+				</a-entity>
+			</a-scene>
+			<button class="restart">
+				<img src="src/assets/images/restart.png">
+			</button>
+		</div>
+		<div class="overlay">
+			<div class="module intro">
+				<div class="content">
+					<div class="table">
+						<div class="intro table-cell">
+							<p style="margin-bottom: 1em;">A cutting edge, browser based, 3D environment</p>
+							<button class="btn start inactive">Loading</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

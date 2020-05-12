@@ -129,7 +129,7 @@
 						</a-text>
 					</script>
 				</a-assets>
-				<a-entity light="type: ambient; intensity:1; color: #FFF"></a-entity>
+				<!--a-entity light="type: ambient; intensity:1; color: #FFF"></a-entity-->
 				<a-entity id="cameraRig" class="camera-parent teleport-object" position="2.81 0 1.00">
 					<a-animation class="animateToStart"
 						attribute='position'
@@ -360,7 +360,7 @@
 				<a-box class="hitbox raycaster no-teleport" opacity="0" color="#000000" width='1.74' height='1.35' depth='0.04' rotation="-90 0 0" position='0.295 0.061 -0.673'></a-box>
 				<a-entity class="cursor" cursor="near: 0.1; far: 1; rayOrigin: mouse;" raycaster="objects: .raycaster, .animated-model; recursive: true; near: 0.1; far:10;" position='0 0 -0.1'>
 				</a-entity>
-				<a-box id="floor-plane" class="teleport-target raycaster" opacity="0" color="#000000" width='5.5' height='8' rotation="-90 0 0" position='0.27 -0.46 1.72'></a-box>
+				<a-box id="floor-plane" class="teleport-target raycaster" opacity="0" color="#000000" width='5.5' height='8' rotation="-90 0 0" position='0.45 -0.46 1.72'></a-box>
 				</a-entity>
 				<a-entity id="hotspot-container">
 					<a-entity class="hotspot no-teleport" position="-2.02 1.03 -1.00" look-at="[camera]">
@@ -392,7 +392,7 @@
 						<a-entity class="button overlapper" template="src: #imagebtn" data-depthtest="false" data-src="src/assets/images/arrow.png" data-target='tap'></a-entity>
 					</a-entity>
 				</a-entity>
-				<a-entity class="open-anim-help no-teleport" template="src: #imagebtn" data-depthtest="true" position="0.3 0.5 0.1" data-src="src/assets/images/click.png" look-at="[camera]" visible="false">
+				<!--a-entity class="open-anim-help no-teleport" template="src: #imagebtn" data-depthtest="true" position="0.3 0.5 0.1" data-src="src/assets/images/click.png" look-at="[camera]" visible="false">
 				</a-entity>
 				<a-entity position="0.327 1.210 -0.440" class="paint-menu overlapper no-teleport" look-at="[camera]" visible="false">
 					<a-animation attribute="scale"
@@ -409,7 +409,7 @@
 					<a-entity template="src: #colour" data-show="0.08892 0.247 0" data-material="color: #46583e" class="opt1 no-teleport"></a-entity>
 					<a-entity template="src: #colour" data-show="0.234 0.10985 0" data-material="color: #314554" class="opt2 no-teleport"></a-entity>
 					<a-entity template="src: #colour" data-show="0.247 -0.08892 0" data-material="color: #876726" class="opt3 no-teleport"></a-entity>
-				</a-entity>
+				</a-entity-->
 			</a-scene>
 			<button class="restart">
 				<img src="src/assets/images/restart.png">

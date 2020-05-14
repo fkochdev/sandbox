@@ -7,7 +7,7 @@
 		<script src="dist/js/app.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
-		<script>
+		<!--script>
 		AFRAME.registerComponent('shadow-material', {
 			init: function(){
 				console.log('shadow-material');
@@ -22,7 +22,7 @@
 
 			}
 		});
-	</script>
+	</script-->
 
 	<body style="overflow:hidden;">
 		<div class="canvas-container">
@@ -148,9 +148,8 @@
 				</a-assets>
 
 				<!--a-entity light="type: ambient; intensity:1; color: #FFF"></a-entity-->
-				<a-entity light="intensity:1.9;castShadow:true" position="-3.501 4.8991 1.24818" data-aframe-default-light="" aframe-injected="" visible="" rotation="0 45 0"></a-entity>
-
-				<a-entity id="shadowPlane" opacity="0" color="#000000" geometry="primitive:plane; width: 6; height: 8" rotation="-90 0 0" position="0.60773 -1.38379 -1.28866" shadow="receive: true" shadow-material></a-entity>
+				<!--a-entity light="intensity:1.9;castShadow:true" position="-3.501 4.8991 1.24818" data-aframe-default-light="" aframe-injected="" visible="" rotation="0 45 0"></a-entity-->
+				<!--a-entity id="shadowPlane" opacity="0" color="#000000" geometry="primitive:plane; width: 6; height: 8" rotation="-90 0 0" position="0.60773 -1.38379 -1.28866" shadow="receive: true" shadow-material></a-entity-->
 
 				<a-entity id="cameraRig" class="camera-parent teleport-object" position="2.81 0 1.00">
 					<a-animation class="animateToStart"
@@ -210,8 +209,8 @@
 					gltf-material-changer
 					scale="0.002 0.002 0.002"
 					gltf-material-upres="basePath: src/assets/materials/; mobile:false"
-					shadow="receive:false;cast:false;"
 				></a-entity>
+				<!--shadow="receive:false;cast:false;"-->
 				<a-entity class='appliances-model'
 					gltf-model-draco="
 					src:src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/occhio/test.gltf;
@@ -219,9 +218,9 @@
 					"
 					scale="0.04 0.04 0.04"
 					position="-0.429 -1.450 -3.093"
-					shadow="receive:false; cast:true"
-
 				></a-entity>
+				<!--	shadow="receive:false; cast:true"-->
+
 				<!--a-entity class='animated-model raycaster #5' gltf-model="src/assets/models/VR_KITCHEN_[STATIC-MATERIALS]/Drawer_Top_Right.gltf" gltf-material-changer
 				gltf-material-upres="basePath: src/assets/materials/; mobile:false" scale="0.001 0.001 0.001">
 					<a-animation attribute="position"

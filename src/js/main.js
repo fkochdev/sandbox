@@ -56,7 +56,7 @@
 		hotspotData: {	
 			'lamp':{
 				'camera':{	
-					"position":"0.735 -0.35 -4.75",	
+					"position":"0.735 -0.35 -3.5",	
 					"pitch":-30,	
 					"yaw":0,	
 					"radius":1.5,	

@@ -54,6 +54,19 @@
 				</a-entity>\
 			</a-sphere>',
 		hotspotData: {	
+			'lamp':{
+				'camera':{	
+					"position":"0.4119 1.04 -4.45409",	
+					"pitch":-30,	
+					"yaw":0,	
+					"radius":1.5,	
+					"minAzimuthAngle":-Infinity,	
+					"maxAzimuthAngle":Infinity,	
+					"minPolarAngle":0,	
+					"maxPolarAngle":Math.PI	
+				}
+			},	
+
 			'sink':{
 				'camera':{	
 					"position":"-1.0 0 -1.03",	
